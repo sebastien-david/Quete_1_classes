@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Quete_1_classes
+namespace test
 {
     class Program
     {
@@ -15,24 +15,19 @@ namespace Quete_1_classes
             public int attackPoint;
             public int defensePoint;
 
-            public void IsAlive ()
+            public bool IsAlive()
             {
-                bool characterAlive;
+
                 if (PV > 0)
                 {
-
-                    characterAlive = true;
-                    Console.Write(name + " is alive ");
-                    Console.ReadLine();
+                    return true;
                 }
                 else
                 {
-                    characterAlive = false;
-                    Console.Write(name + " is dead ");
-                    Console.ReadLine();
+                    return false;
                 }
             }
-                
+
             public void Attack(Character character2)
             {
                 character2.PV = (character2.PV) - (attackPoint - character2.defensePoint);
@@ -54,19 +49,21 @@ namespace Quete_1_classes
             J2.attackPoint = 40;
             J2.defensePoint = 20;
 
-            while (J2.PV > 0 && J1.PV > 0)
+            while (J2.IsAlive() && J1.IsAlive())
             {
                 J1.Attack(J2);
                 J2.Attack(J1);
             }
 
-            if (J1.PV <= 0)
+            if (J1.IsAlive())
             {
-                J1.IsAlive();
+                Console.Write(" Le joueur 1 a gagné ");
+                Console.ReadLine();
             }
-            else if (J2.PV <= 0)
+            else if (J2.IsAlive())
             {
-                J2.IsAlive();
+                Console.Write(" Le joueur 2 a gagné ");
+                Console.ReadLine();
             }
         }
     }
